@@ -6,7 +6,7 @@ export type ControllerType = (
   next: NextFunction
 ) => Promise<void | Response<any, Record<string, any>>>;
 
-export default interface NewUserRequest {
+export interface NewUserRequest {
   _id: string;
   name: string;
   email: string;
@@ -14,4 +14,12 @@ export default interface NewUserRequest {
   gender: string;
   dob: Date;
   role: string;
+}
+
+export interface NewProductRequest {
+  name: string;
+  price: number;
+  stock: number;
+  category: string;
+  desc: string;
 }
