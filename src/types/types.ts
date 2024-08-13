@@ -23,3 +23,22 @@ export interface NewProductRequest {
   category: string;
   desc: string;
 }
+
+export type ProductSearchRequest = {
+  search?: string;
+  sort?: string;
+  category?: string;
+  price?: number;
+  page?: number;
+};
+
+export interface ProductBaseQuery {
+  name?: {
+    $regex: string;
+    $options: string;
+  };
+  price?: {
+    $lte: number;
+  };
+  category?: string;
+}
