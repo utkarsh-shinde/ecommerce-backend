@@ -42,3 +42,37 @@ export interface ProductBaseQuery {
   };
   category?: string;
 }
+
+export type InvalidateCacheType = {
+  product?: boolean;
+  order?: boolean;
+  admin?: boolean;
+};
+
+export type ShippingInfoType = {
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  pincode: number;
+};
+
+export type OrderItemsType = {
+  name: string;
+  photo: string;
+  price: number;
+  quantity: number;
+  productID: string;
+};
+
+export type NewOrderRequestBody = {
+  shippingInfo: ShippingInfoType;
+  user: string;
+  subTotal: number;
+  tax: number;
+  discount: number;
+  shippingCharges: number;
+  total: number;
+  status: string;
+  orderItems: OrderItemsType[];
+};
