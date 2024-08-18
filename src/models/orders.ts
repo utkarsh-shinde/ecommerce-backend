@@ -27,6 +27,7 @@ const orderSchema = new mongoose.Schema(
     user: {
       type: String,
       ref: "users",
+      required: true,
     },
     subTotal: {
       type: Number,
@@ -53,28 +54,30 @@ const orderSchema = new mongoose.Schema(
       enum: ["Processing", "Shipped", "Delivered"],
       default: "Processing",
     },
-    orderItems: {
-      name: {
-        type: String,
-        required: true,
+    orderItems: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        photo: {
+          type: String,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
+        productID: {
+          type: mongoose.Types.ObjectId,
+          ref: "products",
+        },
       },
-      photo: {
-        type: String,
-        required: true,
-      },
-      price: {
-        type: Number,
-        required: true,
-      },
-      quantity: {
-        type: Number,
-        required: true,
-      },
-      productID: {
-        type: mongoose.Types.ObjectId,
-        ref: "products",
-      },
-    },
+    ],
   },
   { timestamps: true }
 );

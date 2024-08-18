@@ -10,6 +10,7 @@ import morgan from "morgan";
 import userRouter from "./routes/user.js";
 import productRouter from "./routes/product.js";
 import orderRouter from "./routes/order.js";
+import paymentRouter from "./routes/payment.js";
 
 config({
   path: "./.env",
@@ -24,7 +25,7 @@ const app = express();
 export const myCache = new NodeCache();
 
 app.use(express.json());
-app.use(morgan("dev "));
+app.use(morgan("dev"));
 
 app.get("/", (req: Request, res: Response) => {
   res.send("API working with url :: /api/v1");
@@ -33,6 +34,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/order", orderRouter);
+app.use("/api/v1/payment", paymentRouter);
 
 app.use("/uploads", express.static("uploads"));
 

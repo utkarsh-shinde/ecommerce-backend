@@ -41,9 +41,9 @@ export const handleNewProduct = TryCatch(
     });
 
     // invalidates cache
-    await invalidateCache({ product: true });
+    await invalidateCache({ product: true, productID: _product.id });
 
-    return res.status(200).json({ success: true, _product });
+    return res.status(201).json({ success: true, _product });
   }
 );
 
@@ -130,7 +130,7 @@ export const handleUpdateProduct = TryCatch(async (req, res, next) => {
 
   _product.save();
   // invalidates cache
-  await invalidateCache({ product: true });
+  await invalidateCache({ product: true, productID: _product.id });
 
   return res
     .status(200)
@@ -147,7 +147,7 @@ export const handleDeleteProduct = TryCatch(async (req, res, next) => {
 
   _product.deleteOne();
   // invalidates cache
-  await invalidateCache({ product: true });
+  await invalidateCache({ product: true, productID: _product.id });
 
   return res
     .status(200)
@@ -196,22 +196,22 @@ export const handleGetAllProducts = TryCatch(
   }
 );
 
-const generateRandomFakeData = async (count: number = 10) => {
-  const fakeProducts = [];
-  for (let id = 0; id < count; id++) {
-    const product = {
-      name: faker.commerce.productName(),
-      photo: "uploads/1c891d02-302c-4325-b3ce-9a8db0b0fa16.png",
-      price: faker.commerce.price({ min: 1500, max: 80000, dec: 0 }),
-      stock: faker.commerce.price({ min: 0, max: 100, dec: 0 }),
-      category: faker.commerce.department(),
-      createdAt: new Date(faker.date.past()),
-      updatedAt: new Date(faker.date.recent()),
-    };
+// const generateRandomFakeData = async (count: number = 10) => {
+//   const fakeProducts = [];
+//   for (let id = 0; id < count; id++) {
+//     const product = {
+//       name: faker.commerce.productName(),
+//       photo: "uploads/1c891d02-302c-4325-b3ce-9a8db0b0fa16.png",
+//       price: faker.commerce.price({ min: 1500, max: 80000, dec: 0 }),
+//       stock: faker.commerce.price({ min: 0, max: 100, dec: 0 }),
+//       category: faker.commerce.department(),
+//       createdAt: new Date(faker.date.past()),
+//       updatedAt: new Date(faker.date.recent()),
+//     };
 
-    fakeProducts.push(product);
-  }
-  await Product.create(fakeProducts);
-};
+//     fakeProducts.push(product);
+//   }
+//   await Product.create(fakeProducts);
+// };
 
 //generateRandomFakeData(50);
